@@ -5,7 +5,7 @@
 class Ball{
 public:
 	Ball();
-	void Update(Paddle paddles[]);
+	void Update(Paddle paddles[], int *leftScore, int *rightScore);
 	void Reset();
 	void Render();
 	float GetBallHeight();

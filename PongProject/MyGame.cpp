@@ -49,7 +49,7 @@ void GameUpdate(HWND window)
 		g_GameOver = true;
 
 	//update objects in the world
-	m_ball.Update(m_paddles);
+	m_ball.Update(m_paddles, &m_leftScore, &m_rightScore);
 	float aiTarget = m_ball.GetBallHeight();
 	m_paddles[0].Update(aiTarget);
 	m_paddles[1].Update(aiTarget);
