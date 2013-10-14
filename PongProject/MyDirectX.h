@@ -66,7 +66,7 @@ struct SPRITE
 };
 
 //Bounding box collision detection
-int Collision(SPRITE sprite1, SPRITE sprite2);
+int Collision(SPRITE sprite1, SPRITE sprite2, RECT *dest);
 
 //Direct3D functions
 bool Direct3DInit(HWND hwnd, int width, int height, bool fullscreen);
