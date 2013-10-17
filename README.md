@@ -4,4 +4,5 @@ PongProject
 - If you have come here looking to provide feedback on the code, please keep in mind that the files noted above are not entirely my code and I'm primarily looking for feedback on the other files. However, I'm grateful for any feedback provided by anybody really.
 
 KNOWN ISSUES
-- There is some funniness when the ball makes contact with the corners of the paddles.
+- There is an edge case where on the corner of the paddles the ball will collide with the paddle more than once before traveling away from the paddle.
+- There is an edge case where the AI paddle will trap the ball in its corner.
