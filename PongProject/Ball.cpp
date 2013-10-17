@@ -12,8 +12,7 @@ Ball::Ball()
 
 void Ball::Update(Paddle paddles[], int *leftScore, int *rightScore)
 {
-	m_ballSprite.x += m_ballSprite.velx;
-	m_ballSprite.y += m_ballSprite.vely;
+	
 	
 	RECT intersection;
 	if(Collision(paddles[0].m_paddleSprite, m_ballSprite, &intersection))
@@ -40,6 +39,9 @@ void Ball::Update(Paddle paddles[], int *leftScore, int *rightScore)
 
 	if(m_ballSprite.y > SCREENH - m_ballSprite.height || m_ballSprite.y < 0)
 		m_ballSprite.vely *= -1;
+
+	m_ballSprite.x += m_ballSprite.velx;
+	m_ballSprite.y += m_ballSprite.vely;
 }
 
 void Ball::Reset()

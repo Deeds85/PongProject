@@ -14,10 +14,7 @@ LPD3DXFONT m_font = NULL;
 
 bool GameInit(HWND window)
 {
-    //initialize Direct3D
     Direct3DInit(window, SCREENW, SCREENH, false);
-
-    //initialize DirectInput
     DirectInputInit(window);
 
 	m_leftScore = m_rightScore = 0;
@@ -31,24 +28,18 @@ bool GameInit(HWND window)
 
 void GameUpdate(HWND window)
 {
-    //make sure the Direct3D device is valid
     if (!g_d3ddev)
 	{
 		MessageBox(window, "Direct3D device is not valid", "Error", 0);
 		return;
 	}
 
-    //update input devices
     DirectInputUpdate();
-
-    //clear the scene
     g_d3ddev->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
 
-    //exit when escape key is pressed
     if (KeyDown(DIK_ESCAPE))
 		g_GameOver = true;
 
-	//update objects in the world
 	m_ball.Update(m_paddles, &m_leftScore, &m_rightScore);
 	float aiTarget = m_ball.GetBallHeight();
 	m_paddles[0].Update(aiTarget);
@@ -63,10 +54,10 @@ void GameRender(HWND window)
         g_spriteObj->Begin(D3DXSPRITE_ALPHABLEND);
 
 		//draw the score
-		ostringstream left, right;
-		left << m_leftScore;
-		right << m_rightScore;
-		string score = left.str() + ':' + right.str();
+		ostringstream os;
+		os << m_leftScore << ":" << m_rightScore;
+		string score = os.str();
+
 		RECT rect = {480,50,600,700};
 		m_font->DrawText(NULL, score.c_str(), score.length(), &rect, DT_NOCLIP|DT_SINGLELINE, D3DCOLOR_XRGB(255,255,255));
 

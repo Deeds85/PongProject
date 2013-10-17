@@ -46,10 +46,11 @@ void Paddle::Render()
 
 void Paddle::HitBall(float intersect, float *velx, float *vely)
 {
-	float paddleMiddle = m_paddleSprite.y + (m_paddleSprite.height / 2);
+	float paddleMiddle = (m_paddleSprite.height / 2);
 	float ballVelocity = 50;
 	float x = abs(*velx); 
 	float y = abs(*vely);
+	intersect -= m_paddleSprite.y;
 	
 	if(intersect > paddleMiddle)
 	{
