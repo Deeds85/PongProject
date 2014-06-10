@@ -59,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	DWORD nextGameTick = GetTickCount();
-	int loops;
+	//int loops;
 
     //main message loop
 	MSG message;
@@ -71,18 +71,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		    DispatchMessage(&message);
 	    }
 
-		loops = 0;
-		while( GetTickCount() > nextGameTick && loops < MAX_FRAMESKIP)
-		{
-			//Update game objects
-			GameUpdate(window);
+		//loops = 0;
+		//while( GetTickCount() > nextGameTick && loops < MAX_FRAMESKIP)
+		//{
+		//	//Update game objects
+		//	GameUpdate(window);
 
-			nextGameTick += SKIP_TICKS;
-			loops++;
-		}
-        
-		//Render game objects
-		GameRender(window);
+		//	nextGameTick += SKIP_TICKS;
+		//	loops++;
+		//}
+  //      
+		////Render game objects
+		//GameRender(window);
+
+		do 
+		{
+			GameRender(window);
+		} while (GetTickCount() < nextGameTick);
+
+		GameUpdate(window);
+		nextGameTick += SKIP_TICKS;
     }
 
     //shutdown

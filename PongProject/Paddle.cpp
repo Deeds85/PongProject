@@ -32,9 +32,9 @@ void Paddle::Update(float aiTarget)
 	else
 	{
 		if (m_paddleSprite.y > aiTarget - (m_paddleSprite.height / 2) && m_paddleSprite.y > 0)
-			m_paddleSprite.y -= 5.0f;
+			m_paddleSprite.y -= 3.5f;
 		if (m_paddleSprite.y < aiTarget - (m_paddleSprite.height / 2) && m_paddleSprite.y < SCREENH - m_paddleSprite.height - 5)
-			m_paddleSprite.y += 5.0f;
+			m_paddleSprite.y += 3.5f;
 	}
 }
 
