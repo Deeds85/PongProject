@@ -44,23 +44,26 @@ void Paddle::Render()
 		m_paddleSprite.frame, m_paddleSprite.columns, m_paddleSprite.rotation);
 }
 
-void Paddle::HitBall(float intersect, float *velx, float *vely)
+void Paddle::HitBall(RECT intersection, float *velx, float *vely, float *displacement)
 {
 	float paddleMiddle = (m_paddleSprite.height / 2);
 	float ballVelocity = 50;
 	float x = abs(*velx); 
 	float y = abs(*vely);
-	intersect -= m_paddleSprite.y;
+	float intersectPoint = intersection.top + 8;
+
+	*displacement = intersection.right - intersection.left;
+	intersectPoint -= m_paddleSprite.y;
 	
-	if(intersect > paddleMiddle)
+	if (intersectPoint > paddleMiddle)
 	{
-		y = (1 - (paddleMiddle / intersect)) * ballVelocity;
+		y = (1 - (paddleMiddle / intersectPoint)) * ballVelocity;
 		x = sqrt(ballVelocity - y);
 		y = sqrt(y);
 	}
-	else if (intersect < paddleMiddle)
+	else if (intersectPoint < paddleMiddle)
 	{
-		y = (intersect / paddleMiddle) * ballVelocity;
+		y = (intersectPoint / paddleMiddle) * ballVelocity;
 		x = sqrt(ballVelocity - y);
 		y = sqrt(y) * -1;
 	}
@@ -70,8 +73,11 @@ void Paddle::HitBall(float intersect, float *velx, float *vely)
 		x = sqrt(ballVelocity);
 	}
 
-	if(*velx > 0)
+	if (*velx > 0)
+	{
 		x *= -1;
+		*displacement *= -1;
+	}
 
 	*velx = x;
 	*vely = y;

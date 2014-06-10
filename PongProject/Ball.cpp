@@ -15,14 +15,18 @@ void Ball::Update(Paddle paddles[], int *leftScore, int *rightScore)
 	
 	
 	RECT intersection;
+	float displacement;
+
 	if(Collision(paddles[0].m_paddleSprite, m_ballSprite, &intersection))
 	{
-		paddles[0].HitBall(intersection.top + (m_ballSprite.height/2), &m_ballSprite.velx, &m_ballSprite.vely);
+		paddles[0].HitBall(intersection, &m_ballSprite.velx, &m_ballSprite.vely, &displacement);
+		m_ballSprite.x += displacement;
 	}
 
 	if(Collision(paddles[1].m_paddleSprite, m_ballSprite, &intersection))
 	{
-		paddles[1].HitBall(intersection.top + (m_ballSprite.height/2), &m_ballSprite.velx, &m_ballSprite.vely);
+		paddles[1].HitBall(intersection, &m_ballSprite.velx, &m_ballSprite.vely, &displacement);
+		m_ballSprite.x += displacement;
 	}
 
 	if(m_ballSprite.x > SCREENW - m_ballSprite.width)
